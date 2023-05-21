@@ -3,7 +3,7 @@ import InterviewerListItem from 'components/InterviewerListItem';
 import 'components/InterviewerList.scss';
 
 
-function InterviewerList({ interviewers, interviewer, setInterviewer }) {
+export default function InterviewerList({ interviewers, interviewer, setInterviewer }) {
   const interviewerListItems = interviewers.map((interviewerObj) => {
     return (
       <InterviewerListItem
@@ -23,5 +23,3 @@ function InterviewerList({ interviewers, interviewer, setInterviewer }) {
     </section>
   );
 }
-
-export default InterviewerList;
