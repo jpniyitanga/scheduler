@@ -48,7 +48,6 @@ export default function Application(props) {
   });
 
 
-
   return (
     <main className="layout">
       <section className="sidebar">
@@ -72,7 +71,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {schedule} 
+        {schedule} // show appointments
         <Appointment time="5pm"/>
       </section>
     </main>
