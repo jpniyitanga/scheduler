@@ -71,7 +71,8 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {schedule} // show appointments
+        {/* line below shows appointments */}
+        {schedule} 
         <Appointment time="5pm"/>
       </section>
     </main>
