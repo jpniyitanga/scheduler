@@ -32,13 +32,18 @@ export default function Application(props) {
     console.log("Book interview", id, interview);
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview },
+      interview: {...interview},
     };
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
-    setState({ ...state, appointments }); // update state
+    // setState({ ...state, appointments }); // update state
+
+    return Axios.put(`/api/appointments/${id}`, {interview}).then((res) =>
+      setState({...state, appointments})); 
+    
+
   }
   const interviewers = getInterviewersForDay(state, state.day);
 
