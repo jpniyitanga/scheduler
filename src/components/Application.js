@@ -3,9 +3,11 @@ import Axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "components/Appointment/index";
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
-
-
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "helpers/selectors";
 
 export default function Application(props) {
   const setDay = (day) => setState({ ...state, day });
@@ -13,8 +15,8 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
-  }); 
+    interviewers: {},
+  });
 
   useEffect(() => {
     Promise.all([
@@ -23,8 +25,13 @@ export default function Application(props) {
       Axios.get("/api/interviewers"),
     ]).then((all) => {
       //Set state for both days and appointments
-      setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-      
+      setState((prev) => ({
+        ...prev,
+        days: all[0].data,
+        appointments: all[1].data,
+        interviewers: all[2].data,
+      }));
+      // .catch((err)=>console.error(err))
     });
   }, []);
 
@@ -32,7 +39,7 @@ export default function Application(props) {
     console.log("Book interview", id, interview);
     const appointment = {
       ...state.appointments[id],
-      interview: {...interview},
+      interview: { ...interview },
     };
     const appointments = {
       ...state.appointments,
@@ -40,34 +47,35 @@ export default function Application(props) {
     };
     // setState({ ...state, appointments }); // update state
 
-    return Axios.put(`/api/appointments/${id}`, {interview}).then((res) =>
-      setState({...state, appointments}));    
-
+    return Axios.put(`/api/appointments/${id}`, {
+      interview,
+    })
+      .then((res) => setState({ ...state, appointments }))
+      // .catch((err) => console.error(err));
   }
 
-  function cancelInterview(id) { 
+  function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
-      interview: null
+      interview: null,
     };
 
     const appointments = {
       ...state.appointments,
-      [id]: appointment
-    }
+      [id]: appointment,
+    };
 
-    return Axios.delete(`http://localhost:8001/api/appointments/${id}`)
-    .then((response) => {
-      setState({...state, appointments})
-      return response;
-    })
-    .catch(err => console.log(err))
+    return Axios.delete(`/api/appointments/${id}`)
+      .then((response) => {
+        setState({ ...state, appointments });
+        return response;
+      })
+      // .catch((err) => console.log(err));
   }
-
 
   const interviewers = getInterviewersForDay(state, state.day);
 
-  const appointments = getAppointmentsForDay(state, state.day); 
+  const appointments = getAppointmentsForDay(state, state.day);
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
@@ -79,12 +87,10 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
-        cancelInterview={ cancelInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
-
-
 
   return (
     <main className="layout">
@@ -96,11 +102,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList
-            days={state.days}
-            value={state.day}
-            onChange={setDay}
-          />
+          <DayList days={state.days} value={state.day} onChange={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -110,7 +112,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {/* line below shows appointments */}
-        {schedule} 
+        {schedule}
         <Appointment time="5pm" interviewers={interviewers} />
       </section>
     </main>
