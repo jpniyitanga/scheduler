@@ -5,6 +5,7 @@ import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
+import Confirm from "./Confirm";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
@@ -20,7 +21,6 @@ export default function Appointment(props) {
   );
 
   function save(name, interviewer) {  
-
     const interview = {
       student: name,
       interviewer,
@@ -30,10 +30,9 @@ export default function Appointment(props) {
       transition(SAVING);
     };
 
-    props.bookInterview(props.id, interview).then(() => transition(SHOW));
-    
+    props.bookInterview(props.id, interview).then(() => transition(SHOW));    
   }
-  console.log("Props: ", props);
+  // console.log("Props: ", props);
 
 function remove() {
   if (mode === CONFIRM) {
@@ -70,7 +69,12 @@ function remove() {
           />
           )}
         {mode === SAVING && <Status message="Saving"/>}
-        {mode === DELETING && <Status message="Deleting"/>}
+        {mode === DELETING && <Status message="Deleting" />}
+        {mode === CONFIRM && <Confirm
+          onCancel={back}
+          onConfirm={remove}
+          message="Are you sure?"
+        />}
         
         
       </>

@@ -57,9 +57,9 @@ export default function Application(props) {
     }
 
     return Axios.delete(`http://localhost:8001/api/appointments/${id}`)
-    .then(res => {
+    .then((response) => {
       setState({...state, appointments})
-      return res
+      return response;
     })
     .catch(err => console.log(err))
   }
