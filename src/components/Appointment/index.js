@@ -39,7 +39,6 @@ export default function Appointment(props) {
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE, true));
   }
-  // console.log("Props: ", props);
 
   function remove() {
     if (mode === CONFIRM) {
@@ -56,16 +55,6 @@ export default function Appointment(props) {
   function edit() {
     transition(EDIT);
   }
-
-  // function destroy(event) {
-  //   transition(DELETING, true);
-  //   props
-  //     .cancelInterview(props.id)
-  //     .then(() => transition(EMPTY))
-  //     .catch((error) => transition(ERROR_DELETE, true));
-  // }
-
-  // console.log(props.interview.student);
   return (
     <article className="appointment">
       <>
