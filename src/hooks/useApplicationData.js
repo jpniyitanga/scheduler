@@ -1,10 +1,17 @@
-import React from 'react'
 import {useEffect, useReducer } from 'react';
 import Axios from 'axios';
 
 const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
+
+function getSpotsForSelectedDay(state, day) {
+  const selectedDay = state.days.filter((day) => day.name === day);
+    selectedDay.appointments.map((appointment) => {
+    return state.appointments[appointment].interview ? appointment : appointment + 1;
+  });
+}
+
 
 function reducer (state, action) {
   switch (action.type) {
@@ -14,8 +21,11 @@ function reducer (state, action) {
       return { ...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers };
     case SET_INTERVIEW: {      
       const appointment = { ...state.appointments[action.id], interview: { ...action.interview } };
-      const appointments = { ...state.appointments, [action.id]: appointment };
-      return { ...state, appointments};
+      // const appointments = { ...state.appointments, [action.id]: appointment };
+      
+      const newState = { ...state, appointments: { ...state.appointments, [action.id]: appointment } }
+      
+      return { ...newState, days: state.days.map((day)=>({...day, spots: getSpotsForSelectedDay(newState, day.name)})) };
     }
     default:
       throw new Error(
