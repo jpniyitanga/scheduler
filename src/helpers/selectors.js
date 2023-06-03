@@ -1,4 +1,5 @@
 
+//Returns appointment object inside appointments instead of array in days.
 export function getAppointmentsForDay(state, day) {
   const selectedDay = state.days.find(theDay => theDay.name === day);
   const filteredAppointments = [];
@@ -12,6 +13,7 @@ export function getAppointmentsForDay(state, day) {
   return filteredAppointments;
 }
 
+//Return interview object with two keys (student and interviewer). Interviewer is an object in interviewers
 export function getInterview(state, interview) { 
   if (!interview) return null;
   return {
@@ -20,7 +22,9 @@ export function getInterview(state, interview) {
   }
 }
   
+// Returns interviewer object in interviwers
 export function getInterviewersForDay(state, day) {
+  console.log(state)
   const selectedDay = state.days.find((theDay) => theDay.name === day);
   const filterdInterviewers = [];
   if (!selectedDay) {
