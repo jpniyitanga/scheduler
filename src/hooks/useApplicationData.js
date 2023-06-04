@@ -6,7 +6,7 @@ const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
 
 function getSpotsForSelectedDay(state, day) {
-  const selectedDay = state.days.filter((theDay) => theDay.name === day);
+  const selectedDay = state.days.find((theDay) => theDay.name === day);
     selectedDay.appointments.map((appointment) => {
     return state.appointments[appointment].interview ? appointment : appointment + 1;
   });
@@ -45,6 +45,7 @@ export default function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
+      // Axios.get("/api/debug/reset"),
       Axios.get("/api/days"),
       Axios.get("/api/appointments"),
       Axios.get("/api/interviewers"),
