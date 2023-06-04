@@ -9,7 +9,6 @@ export function getAppointmentsForDay(state, day) {
   for (let appointment of selectedDay.appointments) { 
     filteredAppointments.push(state.appointments[appointment])
   }
-  
   return filteredAppointments;
 }
 
@@ -24,7 +23,6 @@ export function getInterview(state, interview) {
   
 // Returns interviewer object in interviwers
 export function getInterviewersForDay(state, day) {
-  console.log(state)
   const selectedDay = state.days.find((theDay) => theDay.name === day);
   const filterdInterviewers = [];
   if (!selectedDay) {
