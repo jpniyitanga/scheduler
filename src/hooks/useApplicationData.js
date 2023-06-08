@@ -5,6 +5,7 @@ const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
 const SET_SPOTS = "SET_SPOTS";
 
+// Increases number of empty spots if appointment has no interview
 function updateSpots(state) {
     const days = state.days.map((day) => {
       const spots = day.appointments.reduce((acc, curr) => {
@@ -65,8 +66,6 @@ const setDay = (day) => dispatch({ type:SET_DAY, day:day });
       .then((response) => {
         dispatch({ type: SET_INTERVIEW, id, interview });
         dispatch({ type: SET_SPOTS });
-        // updateSpots(appointments);
-      // setState({ ...state, appointments, days });
       return response;
       });      
     
