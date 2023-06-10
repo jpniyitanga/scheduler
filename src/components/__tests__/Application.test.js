@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, getByText, prettyDOM, getAllByTestId, fireEvent, getByAltText, getByPlaceholderText } from "@testing-library/react";
+import { render, cleanup, waitForElement, getByText, prettyDOM, getAllByTestId, fireEvent, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -29,17 +29,16 @@ describe("Application", () => {
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     
     fireEvent.click(getByText(appointment, "Save"));
+
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
+
+    await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
+
+    const day = getAllByTestId(container, "day").find((day) => queryByText(day, "Monday"));
+
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
     
-    console.log(prettyDOM(appointment));
-
-
   });
-
-  it("changes the schedule when a new day is selected", () => {
-
-    
-  });
-
   
 });
 
