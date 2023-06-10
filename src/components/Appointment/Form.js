@@ -5,7 +5,7 @@ import InterviewerList from "components/InterviewerList";
 export default function Form(props) {
   const reset = () => {
     setStudent("");
-    setInterviewer("");
+    setInterviewer(null);
   };
 
   const cancel = () => {
@@ -22,6 +22,7 @@ export default function Form(props) {
       setError("Please select an interviewer");
       return;
     }
+    setError("");
     props.onSave(student, interviewer);
   }
 
@@ -37,12 +38,13 @@ export default function Form(props) {
             name="student"
             value={student}
             type="text"
-            placeholder={props.student ? props.student : "Enter Student Name"}
+            placeholder="Enter Student Name"
+            // placeholder={props.student ? props.student : "Enter Student Name"}
             onChange={(e) => setStudent(e.target.value)}
             data-testid="student-name-input"
           />
-        </form>
         <section className="appointment__validation">{error}</section>
+        </form>
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
@@ -54,7 +56,7 @@ export default function Form(props) {
           <Button danger onClick={cancel}>
             Cancel
           </Button>
-          <Button confirm onClick={validate}>
+          <Button confirm onSubmit={(e)=>e.preventDefault()} onClick={validate}>
             Save
           </Button>
         </section>
