@@ -96,15 +96,15 @@ export default function useApplicationData() {
     };
 
     const dayOfWeek = findDay(state.day);
-
+console.log("State", state.days[dayOfWeek]);
     const day = {
       ...state.days[dayOfWeek],
       spots: state.days[dayOfWeek].spots + 1,
     };
-
+    console.log(day)
     let days = state.days;
     days[dayOfWeek] = day;
-
+// console.log(days)
     return Axios.delete(`/api/appointments/${id}`)
       .then((response) => {
         setState({ ...state, appointments })
