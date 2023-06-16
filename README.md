@@ -17,8 +17,6 @@ A user-friendly web application designed to streamline and simplify the process 
 11. A user is shown a status indicator while while an interview is being saved or deleted.
 12. When the user presses the close button of the error they are returned to the Form.
 
-## Screeshots
-
 
 ## Setup
 
@@ -41,3 +39,11 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Screeshots
+!["Appointment form after clicking the plus button representing an empty spot"](https://github.com/jpniyitanga/scheduler/blob/testing/docs/appointment-form.png.png?raw=true)
+
+!["An appointment is booked after clicking the save button. Number of remaining spots for that day are updated accordingly.](https://github.com/jpniyitanga/scheduler/blob/testing/docs/appointment-booked.png.png?raw=true)
+
+!["A conformation message is displayed when we try to delete an appointment"](https://github.com/jpniyitanga/scheduler/blob/testing/docs/appointment-form-confirm-delete.png.png?raw=true)
+
