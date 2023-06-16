@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 
@@ -61,7 +60,7 @@ export default function useApplicationData() {
     if (!state.appointments[id].interview) {
       day = {
         ...state.days[daysOfWeek],
-        spots: state.days[daysOfWeek]. spots - 1
+        spots: state.days[daysOfWeek].spots - 1
       }
     } else {
       day = {

@@ -39,7 +39,6 @@ export default function Form(props) {
             value={student}
             type="text"
             placeholder="Enter Student Name"
-            // placeholder={props.student ? props.student : "Enter Student Name"}
             onChange={(e) => setStudent(e.target.value)}
             data-testid="student-name-input"
           />
